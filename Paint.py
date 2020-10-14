@@ -14,6 +14,9 @@ class paint:
         
         elif option[0] == 'V' and option[1].isnumeric() and option[2].isnumeric() and option[3].isnumeric():
             self.colours_vertical(option[1], option[2], option[3], option[4])
+
+        elif option[0] == 'H' and option[1].isnumeric() and option[2].isnumeric() and option[3].isnumeric():
+            self.colours_horizontal(option[1], option[2], option[3], option[4])
         
         elif option[0] == 'S':
             print('\n=>\n')
@@ -45,11 +48,26 @@ class paint:
 
         if Ny1 <= Ny2:
             while Ny1 <= Ny2:
-                if self.__board[Ny1 - 1][int(Mx) - 1]:
-                    self.__board[Ny1 - 1][int(Mx) - 1] = value
+                self.__board[Ny1 - 1][int(Mx) - 1] = value
+
                 Ny1 = Ny1 + 1
         else:
             while Ny2 <= Ny1:
-                if self.__board[Ny2 - 1][int(Mx) - 1]:
-                    self.__board[Ny2 - 1][int(Mx) - 1] = value
+                self.__board[Ny2 - 1][int(Mx) - 1] = value
+
                 Ny2 = Ny2 + 1
+
+    def colours_horizontal(self, Mx1, Mx2, Ny, value):
+        Mx1 = int(Mx1)
+        Mx2 = int(Mx2)
+
+        if Mx1 <= Mx2:
+            while Mx1 <= Mx2:
+                self.__board[int(Ny) - 1][Mx1 - 1] = value
+
+                Mx1 = Mx1 + 1
+        else:
+            while Mx2 <= Mx1:
+                self.__board[int(Ny) - 1][Mx2 - 1] = value
+                    
+                Mx2 = Mx2 + 1
