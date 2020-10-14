@@ -23,7 +23,6 @@ class paint:
         
         elif option[0] == 'S' and len(option) == 1:
             print('\n=>\n')
-            # print(self.__board)
             self.print_board()
             
         elif option[0] == 'D' and len(option) == 1:
