@@ -104,6 +104,14 @@ class paint:
                     if self.__board[j - 1][i - 1] == tempValue:
                         self.__board[j - 1][i - 1] = value
 
+                        start = j - 2
+                        end = i - 2
+
+                        for yside in range(3):
+                            for xside in range(3):
+                                if self.validate_pixel((int(start) + xside), (int(end) + yside)):
+                                    self.__board[int(start) + xside][int(end) + yside] = value
+
 
     
     def validate_pixel(self, Mx, Ny):
