@@ -7,7 +7,7 @@ class paint:
         option = input('> ').split()
 
         if option[0] == 'I' and option[1].isnumeric() and option[2].isnumeric():
-            self.new_image(option[1], option[2])
+            self.new_board(option[1], option[2])
 
         elif option[0] == 'L' and option[1].isnumeric() and option[2].isnumeric():
             self.colours_pixel(option[1], option[2], option[3])
@@ -29,7 +29,9 @@ class paint:
         else:
             print('Command not found')
 
-    def new_image(self, Mx, Ny):
+    def new_board(self, Mx, Ny):
+        self.__board = []
+
         for i in range(int(Ny)):
             row = []
             for j in range(int(Mx)):
@@ -48,12 +50,14 @@ class paint:
 
         if Ny1 <= Ny2:
             while Ny1 <= Ny2:
-                self.__board[Ny1 - 1][int(Mx) - 1] = value
+                if self.validate_pixel((int(Ny1) - 1), (Mx - 1)):
+                    self.__board[Ny1 - 1][int(Mx) - 1] = value
 
                 Ny1 = Ny1 + 1
         else:
             while Ny2 <= Ny1:
-                self.__board[Ny2 - 1][int(Mx) - 1] = value
+                if self.validate_pixel((int(Ny2) - 1), (Mx - 1)):
+                    self.__board[Ny2 - 1][int(Mx) - 1] = value
 
                 Ny2 = Ny2 + 1
 
@@ -63,11 +67,25 @@ class paint:
 
         if Mx1 <= Mx2:
             while Mx1 <= Mx2:
-                self.__board[int(Ny) - 1][Mx1 - 1] = value
+                if self.validate_pixel((int(Ny) - 1), (Mx1 - 1)):
+                    self.__board[int(Ny) - 1][Mx1 - 1] = value
 
                 Mx1 = Mx1 + 1
         else:
             while Mx2 <= Mx1:
-                self.__board[int(Ny) - 1][Mx2 - 1] = value
+                if self.validate_pixel((int(Ny) - 1), (Mx2 - 1)):
+                    self.__board[int(Ny) - 1][Mx2 - 1] = value
                     
                 Mx2 = Mx2 + 1
+    
+    def validate_pixel(self, Mx, Ny):
+        xVector = len(self.__board)
+        if xVector > 0:
+            yVector = len(self.__board[0])
+        else:
+            yVector = 0
+
+        if (int(Mx)) < xVector and (int(Ny)) < yVector:
+            return True
+        else:
+            return False
