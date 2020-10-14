@@ -1,6 +1,7 @@
 class paint:
     
     board = []
+    continueOpt = True
 
     def command_request(self):
         option = input('> ').split()
@@ -8,9 +9,9 @@ class paint:
         if option[0] == 'I' and option[1].isnumeric() and option[2].isnumeric():
             print('ok')
 
-        if option[0] == 'X':
+        elif option[0] == 'X':
             print('bye')
-            return False
+            self.continueOpt = False
 
-        return True
-
+        else:
+            print('Command not found')
