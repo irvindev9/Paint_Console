@@ -23,7 +23,8 @@ class paint:
         
         elif option[0] == 'S' and len(option) == 1:
             print('\n=>\n')
-            print(self.__board)
+            # print(self.__board)
+            self.print_board()
             
         elif option[0] == 'D' and len(option) == 1:
             self.dimensionsPrint()
@@ -43,6 +44,10 @@ class paint:
             for j in range(int(Mx)):
                 row.append('O')
             self.__board.append(row)
+
+    def print_board(self):
+        for indexd in self.__board:
+            print(indexd)
 
     def colours_pixel(self, Mx, Ny, value):
         if self.validate_pixel((int(Ny) - 1), (int(Mx) - 1)):
@@ -87,15 +92,18 @@ class paint:
     def r_region(self, Mx, Ny, value):
         xVector, yVector = self.dimensions()
 
-        if self.validate_pixel((Ny - 1), (Mx - 1)):
-            return 1
+        tempValue = ''
+
+        if self.validate_pixel((int(Ny) - 1), (int(Mx) - 1)):
+            tempValue = self.__board[int(Ny) - 1][int(Mx) - 1]
+        else:
+            return 0
 
         for i in range(xVector):
-            # print(self.__board[i - 1])
             for j in range(yVector):
                 if self.validate_pixel((j - 1), (i - 1)):
-                    if self.__board[j - 1][i - 1] == 1:
-                        return 1
+                    if self.__board[j - 1][i - 1] == tempValue:
+                        self.__board[j - 1][i - 1] = value
 
 
     
